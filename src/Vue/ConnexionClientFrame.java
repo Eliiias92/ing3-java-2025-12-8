@@ -24,7 +24,7 @@ public class ConnexionClientFrame extends JFrame {
         tfEmail = new JTextField();
         panel.add(tfEmail);
 
-        panel.add(new JLabel("Mot de passe :"));
+        panel.add(new JLabel("MDP"));
         tfPassword = new JPasswordField();
         panel.add(tfPassword);
 
