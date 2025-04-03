@@ -13,7 +13,7 @@ public class AjoutArticleFrame extends JFrame {
 
     public AjoutArticleFrame() {
         articleDAO = new ArticleDAO();
-        setTitle("➕ Ajouter un Article");
+        setTitle("Ajouter un Article");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);

@@ -24,7 +24,7 @@ public class ConnexionClientFrame extends JFrame {
         tfEmail = new JTextField();
         panel.add(tfEmail);
 
-        panel.add(new JLabel("MDP"));
+        panel.add(new JLabel("Mot de passe :"));
         tfPassword = new JPasswordField();
         panel.add(tfPassword);
 
@@ -61,7 +61,6 @@ public class ConnexionClientFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Email ou mot de passe incorrect.");
         }
     }
-
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new ConnexionClientFrame().setVisible(true));

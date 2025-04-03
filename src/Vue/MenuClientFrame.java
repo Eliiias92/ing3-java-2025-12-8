@@ -1,16 +1,20 @@
 package Vue;
 
 import Modele.Client;
+import Modele.Panier;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MenuClientFrame extends JFrame {
 
-    private Client client;  // pour garder l'ID et les infos du client
+    private Client client;
+    private Panier panier;
 
     public MenuClientFrame(Client client) {
         this.client = client;
+        this.panier = new Panier(); // panier partagé
+
         setTitle("Espace Client - Bienvenue " + client.getNom());
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -22,25 +26,16 @@ public class MenuClientFrame extends JFrame {
         JLabel labelBienvenue = new JLabel("Bienvenue dans votre espace client, " + client.getNom(), JLabel.CENTER);
         panel.add(labelBienvenue);
 
-        JButton btnCatalogue = new JButton("🛍️ Voir le catalogue");
-        btnCatalogue.addActionListener(e -> {
-            // ici plus tard tu ouvriras la fenêtre Catalogue Client
-            JOptionPane.showMessageDialog(this, "Catalogue à venir !");
-        });
+        JButton btnCatalogue = new JButton("Voir le catalogue");
+        btnCatalogue.addActionListener(e -> new CatalogueClientFrame(client, panier).setVisible(true));
         panel.add(btnCatalogue);
 
-        JButton btnPanier = new JButton("🛒 Mon panier");
-        btnPanier.addActionListener(e -> {
-            // ici plus tard tu ouvriras la fenêtre du panier
-            JOptionPane.showMessageDialog(this, "Panier à venir !");
-        });
+        JButton btnPanier = new JButton("Mon panier");
+        btnPanier.addActionListener(e -> new PanierFrame(client, panier).setVisible(true));
         panel.add(btnPanier);
 
-        JButton btnHistorique = new JButton("📦 Mes commandes");
-        btnHistorique.addActionListener(e -> {
-            // ici plus tard tu ouvriras l'historique
-            JOptionPane.showMessageDialog(this, "Historique à venir !");
-        });
+        JButton btnHistorique = new JButton("Mes commandes");
+        btnHistorique.addActionListener(e -> JOptionPane.showMessageDialog(this, "Historique à venir !"));
         panel.add(btnHistorique);
 
         JButton btnDeconnexion = new JButton("Déconnexion");

@@ -35,7 +35,7 @@ public class ArticleDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("❌ Erreur récupération articles : " + e.getMessage());
+            System.err.println("Erreur récupération articles : " + e.getMessage());
         }
 
         return articles;
@@ -68,10 +68,10 @@ public class ArticleDAO {
             stmt.setInt(7, article.getIdMarque());
 
             stmt.executeUpdate();
-            System.out.println("✅ Article ajouté : " + article.getNom());
+            System.out.println("Article ajouté : " + article.getNom());
 
         } catch (SQLException e) {
-            System.err.println("❌ Erreur insertion article : " + e.getMessage());
+            System.err.println("Erreur insertion article : " + e.getMessage());
         }
     }
 
@@ -88,8 +88,38 @@ public class ArticleDAO {
             return rows > 0;
 
         } catch (SQLException e) {
-            System.err.println("❌ Erreur suppression article : " + e.getMessage());
+            System.err.println("Erreur suppression article : " + e.getMessage());
             return false;
         }
+    }
+
+    // 4. Trouver un article par ID (manquant dans ta version précédente)
+    public Article findById(int id) {
+        Article article = null;
+        String sql = "SELECT a.*, m.nom AS nom_marque FROM article a JOIN marque m ON a.id_marque = m.id WHERE a.id = ?";
+
+        try (Connection conn = DBConnection.getConnexion();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                article = new Article(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("nom_marque"),
+                        rs.getFloat("prix_unitaire"),
+                        rs.getObject("prix_gros") != null ? rs.getFloat("prix_gros") : null,
+                        rs.getObject("quantite_gros") != null ? rs.getInt("quantite_gros") : null,
+                        rs.getInt("id_marque")
+                );
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erreur findById article : " + e.getMessage());
+        }
+
+        return article;
     }
 }

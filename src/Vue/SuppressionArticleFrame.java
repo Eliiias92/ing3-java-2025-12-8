@@ -12,7 +12,7 @@ public class SuppressionArticleFrame extends JFrame {
 
     public SuppressionArticleFrame() {
         articleDAO = new ArticleDAO();
-        setTitle("🗑️ Supprimer un Article");
+        setTitle("Supprimer un Article");
         setSize(300, 150);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -43,13 +43,13 @@ public class SuppressionArticleFrame extends JFrame {
             int id = Integer.parseInt(tfId.getText());
             boolean success = articleDAO.deleteArticleById(id);
             if (success) {
-                JOptionPane.showMessageDialog(this, "✅ Article supprimé avec succès.");
+                JOptionPane.showMessageDialog(this, "Article supprimé avec succès.");
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "⚠️ Aucun article trouvé avec cet ID.", "Erreur", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Aucun article trouvé avec cet ID.", "Erreur", JOptionPane.WARNING_MESSAGE);
             }
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "⚠️ Veuillez entrer un ID valide.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez entrer un ID valide.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
 

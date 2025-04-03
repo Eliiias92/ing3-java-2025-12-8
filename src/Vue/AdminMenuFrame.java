@@ -6,7 +6,7 @@ import java.awt.*;
 public class AdminMenuFrame extends JFrame {
 
     public AdminMenuFrame() {
-        setTitle("🔐 Menu Administrateur");
+        setTitle("Menu Administrateur");
         setSize(300, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -23,7 +23,7 @@ public class AdminMenuFrame extends JFrame {
         btnAjouter.addActionListener(e -> new AjoutArticleFrame().setVisible(true));
         panel.add(btnAjouter);
 
-        JButton btnSupprimer = new JButton("Supprimer un Article");
+        JButton btnSupprimer = new JButton("🗑Supprimer un Article");
         btnSupprimer.addActionListener(e -> new SuppressionArticleFrame().setVisible(true));
         panel.add(btnSupprimer);
 

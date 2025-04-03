@@ -5,6 +5,25 @@ import java.sql.*;
 
 public class ClientDAO {
 
+
+    public void creerClient(String nom, String email, String motDePasse) {
+        String sql = "INSERT INTO utilisateur (nom, email, mot_de_passe, type) VALUES (?, ?, ?, 'client')";
+
+        try (Connection conn = DBConnection.getConnexion();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, nom);
+            stmt.setString(2, email);
+            stmt.setString(3, motDePasse);
+
+            stmt.executeUpdate();
+            System.out.println("Compte client créé avec succès.");
+
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la création du compte : " + e.getMessage());
+        }
+    }
+
     public Client getClientByEmailAndPassword(String email, String password) {
         Client client = null;
 
@@ -31,24 +50,8 @@ public class ClientDAO {
             System.err.println("Erreur lors de la connexion client : " + e.getMessage());
         }
 
+
+
         return client;
     }
-    public void creerClient(String nom, String email, String motDePasse) {
-        String sql = "INSERT INTO utilisateur (nom, email, mot_de_passe, type) VALUES (?, ?, ?, 'client')";
-
-        try (Connection conn = DBConnection.getConnexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, nom);
-            stmt.setString(2, email);
-            stmt.setString(3, motDePasse);
-
-            stmt.executeUpdate();
-            System.out.println("Compte client créé avec succès.");
-
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de la création du compte : " + e.getMessage());
-        }
-    }
-
 }
